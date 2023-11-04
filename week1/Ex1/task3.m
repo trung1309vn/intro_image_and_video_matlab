@@ -7,7 +7,7 @@ im = [[0 0 0 0 0 0 0 1 1 0]
       [0 0 1 1 1 0 0 0 0 0]
       [0 0 1 1 1 0 0 1 1 1]];
 
-imshow(im);
+imshow(im, 'InitialMagnification', 'fit');
 
 S1 = im(1:4,2:5);
 S2 = im(1:4,6:9);

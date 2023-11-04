@@ -1,3 +1,5 @@
+
+
 function ContrastStretch(im, lo, hi)
 im = double(im);
 immax = max(max(im));
