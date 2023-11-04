@@ -1,0 +1,25 @@
+Task 3:
+When you go in the bright place, during this time cones cells will mainly active because it's sensitive to color.
+When you go from a bright place to a dark theater, rods cells will gradually become active, replace for cones.
+Rods cells cannot sense the color, but only the shape of object and responsible for vision at low light level.
+This is the reason why your eyes need times to adapt when you change from bright to dark place or vice versa.
+
+Task 4:
+a. Depend on value of c.
+    If c is negative, we will see the histogram moves to the left on intensity axis (x-axis)
+    If c is positive, we will see the histogram moves to the left on intensity axis (x-axis)
+
+b. Depend on value of c (constrant: c > 0).
+    If c < 1, we will see the histogram shrinks its range to c times to the left on intensity axis (x-axis)
+    and stretch 1/c times on probability axis (y-axis)
+        For example: c = 0.5, in the original image, value 254 has 1000 pixels and 255 has 1000 pixels.
+        In the new image, value 127 will has 2000 pixels
+    
+    If c = 1, nothing will change
+
+    If c > 1, we will see the histogram moves to the right on intensity axis (x-axis) and larger probability
+    for large intensity due to the value clipping
+        For example: c = 2, original image has 1000 pixels with value 255 and 1000 pixels with value 150, new image
+        will have 2000 pixels with value 255
+
+c. histogram is rotate-invariant, so rotating image by 90 degree clockwise doesn't make any change to histogram. 
