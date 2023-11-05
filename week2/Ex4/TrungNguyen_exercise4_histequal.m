@@ -1,6 +1,6 @@
 clear all;
 close all;
-im_dir = "/home/trung/Project/Study/1st_year/2nd_sem/Intro_Image_and_Video/intro_image_and_video_matlab/week2/Ex4/";
+im_dir = "G:/Tampere/intro_image_and_video_matlab/week2/Ex4/";
 img = imread(strcat(im_dir, "moon.png"));
 imwrite(im_enhance(img),strcat(im_dir, "new_moon.png"));
 img = imread(strcat(im_dir, "house.png"));

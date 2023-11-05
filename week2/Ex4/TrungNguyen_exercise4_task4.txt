@@ -1,0 +1,7 @@
+a. Histogram equalization purpose is to stretch the image contrast in order to make the pixel intensity 
+distribution become more equal through out all values (e.g: 0 - 255), which result in linear cummulation 
+distribution function. After achieving the equal probaility distribution, applying equalization wont make any effect.
+
+b. Because for digital image we cannot achieving the continuous distribution function as the discretion of pixel value.
+Hence, the difference in original intensity distribution of the image will effect on the last result.
+   For images like moon and spine when almost half of pixels are in the same value or too less difference, I would say to apply the enhancement on 
