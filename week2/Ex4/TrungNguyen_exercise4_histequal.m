@@ -1,14 +1,25 @@
 clear all;
 close all;
-im_dir = "G:/Tampere/intro_image_and_video_matlab/week2/Ex4/";
+im_dir = "/home/trung/Project/Study/1st_year/2nd_sem/Intro_Image_and_Video/intro_image_and_video_matlab/week2/Ex4/";
 img = imread(strcat(im_dir, "moon.png"));
 imwrite(im_enhance(img),strcat(im_dir, "new_moon.png"));
+ContrastStretch(img, 0, 255);
 img = imread(strcat(im_dir, "house.png"));
 imwrite(im_enhance(img),strcat(im_dir, "new_house.png"));
+ContrastStretch(img, 0, 255);
 img = imread(strcat(im_dir, "spine.jpg"));
 imwrite(im_enhance(img),strcat(im_dir, "new_spine.png"));
+ContrastStretch(img, 0, 255);
 img = imread(strcat(im_dir, "church.png"));
 imwrite(im_enhance(img),strcat(im_dir, "new_church.png"));
+ContrastStretch(img, 0, 255);
+
+% For histogram equalization our final desire is to make the cummulation
+% distribution function of the image linearly increase, hence help increase
+% the constrat of the image and create more visibility.
+% As for constrast stretch, it simply bases on the difference between min
+% and max value of the image, so if min and max are already at maximum
+% difference (e.g min=0 max=255). The function won't do any enhancement.
 
 function res_img = im_enhance(img)
     figure
@@ -58,4 +69,17 @@ function res_img = im_enhance(img)
     nexttile
     bar(norm_res_img_hist);
     title("new image histogram");
+end
+
+function ContrastStretch(im, lo, hi)
+    im = double(im);
+    immax = max(max(im));
+    immin = min(min(im));
+    im1 = (im - immin)*(hi-lo)/(immax-immin)+lo;
+    
+    figure;
+    subplot(221), imshow(uint8(im)), title('Original Image');
+    subplot(222), imhist(uint8(im), gray(256)), title('Histogram');
+    subplot(223), imshow(uint8(im1)), title('Cont. Stretched Image');
+    subplot(224), imhist(uint8(im1), gray(256)), title('Histogram');
 end

@@ -1,6 +1,6 @@
 clear all;
 close all;
-im_dir = "G:/Tampere/intro_image_and_video_matlab/week2/Ex4/";
+im_dir = "/home/trung/Project/Study/1st_year/2nd_sem/Intro_Image_and_Video/intro_image_and_video_matlab/week2/Ex4/";
 ref_img = imread(strcat(im_dir, "corel.png"));
 img1 = imread(strcat(im_dir, "spine.jpg"));
 img2 = imread(strcat(im_dir, "church.png"));
@@ -51,6 +51,7 @@ function img_hist_match(ref_img, img)
     title("img cdf");
 
     % new image
+    figure
     matching_img = img;
     for value = (1:256)
         tmp_ref_cdf = ref_cdf;
@@ -64,6 +65,7 @@ function img_hist_match(ref_img, img)
     title("new image");
     
     % input histogram
+    figure
     img_hist = zeros(1, 256);
     for value = (1:256)
         img_hist(value) = sum(matching_img == value-1, "all");
