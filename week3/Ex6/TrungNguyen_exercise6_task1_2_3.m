@@ -23,6 +23,9 @@ img_1e = sqrt(X.^2 + Y.^2);
 
 f_list = {img_1a, img_1b, img_1c, img_1d, img_1e};
 
+% High energy concentrate where there is difference between pixels intensity
+% Higher difference mean higher frequency 
+
 % 2
 for i = 1:5
     subplot(5,2,(i-1)*2+1)
