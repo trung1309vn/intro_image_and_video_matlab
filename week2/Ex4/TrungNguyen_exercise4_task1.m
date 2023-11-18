@@ -25,7 +25,7 @@ function res_im = power_enhanced_img(c, gamma, img)
 end
 
 % Regardless the constant value c, we have the term log(1+r) and r^gamma. The log term increase slower than power term.
-% Furthermore, the log term decrease the difference between the small and large pixel value, hence, vlaue from [0,255] can be
+% Furthermore, the log term decrease the differbestDaysDFStreamingence between the small and large pixel value, hence, vlaue from [0,255] can be
 % adjust more equally.
 % For the power term, the larger value increase more quickly, so sometimes the large value can be white out while the smaller
 % are still dark

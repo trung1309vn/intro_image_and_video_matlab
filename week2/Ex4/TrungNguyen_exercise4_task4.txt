@@ -4,4 +4,4 @@ distribution function. After achieving the equal probaility distribution, applyi
 
 b. Because for digital image we cannot achieving the continuous distribution function as the discretion of pixel value.
 Hence, the difference in original intensity distribution of the image will effect on the last result.
-   For images like moon and spine when almost half of pixels are in the same value or too less difference, I would say to apply the enhancement on 
+For images like moon and spine when almost half of pixels are in the same value or too less difference, I will devide the image into equal batches and equalize batch separately
