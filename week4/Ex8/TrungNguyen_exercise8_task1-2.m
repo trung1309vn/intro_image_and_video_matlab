@@ -24,14 +24,14 @@ inv_H = TMP ./ T ./(sin(TMP+offset)) ./ (exp(-1*j*TMP));
 fft_img = fftshift(fft2(img));    % FFT on image
 mb_img = real(ifft2(ifftshift(H.*fft_img))); % Filtered image
 subplot(1,3,2)
-imshow(mb_img);
+imshow(mb_img,[]);
 title("motion blur img");
 
 % 1c - inverse filtering
 fft_img = fftshift(fft2(mb_img));
 res_img = real(ifft2(ifftshift(inv_H.*fft_img)));
 subplot(1,3,3)
-imshow(res_img);
+imshow(res_img,[]);
 title("restored img");
 
 % 1d - mean square error
@@ -45,52 +45,53 @@ figure
 subplot(2,3,1)
 noise = (sqrt(50)*randn(h,w))/255.0;
 noise_mb_img = imadd(mb_img, noise);
-imshow(noise_mb_img);
+imshow(noise_mb_img,[]);
+title("noise mb image");
 
 % 2b
 subplot(2,3,2)
 fft_img = fftshift(fft2(noise_mb_img));
 inv_res_img = real(ifft2(ifftshift(inv_H.*fft_img)));
-imshow(inv_res_img);
-title("restored img");
+imshow(inv_res_img,[]);
+title("inv restored img");
 
 % 2c
-NSRs = [0.05, 0.15, 0.5];
+NSRs = [0.005, 0.0075, 0.0125];
 NSR = 0.01;
 subplot(2,3,3)
 fft_img = fftshift(fft2(noise_mb_img));
 factor = abs(H).^2 ./ (abs(H).^2 + NSR);
 denoise_img = inv_H .* factor .* fft_img;
 res_img = real(ifft2(ifftshift(denoise_img)));
-imshow(res_img);
-title("restored img");
-immse(mb_img, res_img)
+imshow(res_img,[]);
+err = immse(img, res_img);
+title("restored img " + num2str(NSR) + " => " + num2str(err));
 
 subplot(2,3,4)
 fft_img = fftshift(fft2(noise_mb_img));
 factor = abs(H).^2 ./ (abs(H).^2 + NSRs(1));
 denoise_img = inv_H .* factor .* fft_img;
 res_img = real(ifft2(ifftshift(denoise_img)));
-imshow(res_img);
-title("restored img");
-immse(mb_img, res_img)
+imshow(res_img,[]);
+err = immse(img, res_img);
+title("restored img " + num2str(NSRs(1)) + " => " + num2str(err));
 
 subplot(2,3,5)
 fft_img = fftshift(fft2(noise_mb_img));
 factor = abs(H).^2 ./ (abs(H).^2 + NSRs(2));
 denoise_img = inv_H .* factor .* fft_img;
 res_img = real(ifft2(ifftshift(denoise_img)));
-imshow(res_img);
-title("restored img");
-immse(mb_img, res_img)
+imshow(res_img,[]);
+err = immse(img, res_img);
+title("restored img " + num2str(NSRs(2)) + " => " + num2str(err));
 
 subplot(2,3,6)
 fft_img = fftshift(fft2(noise_mb_img));
 factor = abs(H).^2 ./ (abs(H).^2 + NSRs(3));
 denoise_img = inv_H .* factor .* fft_img;
 res_img = real(ifft2(ifftshift(denoise_img)));
-imshow(res_img);
-title("restored img");
-immse(mb_img, res_img)
+imshow(res_img,[]);
+err = immse(img, res_img);
+title("restored img " + num2str(NSRs(3)) + " => " + num2str(err));
 
 
