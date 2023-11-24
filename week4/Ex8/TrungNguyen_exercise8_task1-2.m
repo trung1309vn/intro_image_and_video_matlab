@@ -1,6 +1,7 @@
 close all;
 clear all;
-imdir = "/home/trung/Project/Study/1st_year/2nd_sem/Intro_Image_and_Video/intro_image_and_video_matlab/week4/Ex8/";
+%imdir = "C:\Users\vgtrng\Downloads\intro_image_and_video_matlab-master\intro_image_and_video_matlab-master\week4\Ex8\";
+imdir= "";
 img = im2double(imread(strcat(imdir,"DIP.jpg")));
 [h, w] = size(img);
 
@@ -56,10 +57,13 @@ imshow(inv_res_img,[]);
 title("inv restored img");
 
 % 2c
-NSRs = [0.005, 0.0075, 0.0125];
-NSR = 0.01;
+NSRs = [0.005, 0.05, 0.1];
+%NSR = 0.01;
+NSR = mean(power(abs(fft(noise)),2)) / mean(power(abs(fft(mb_img)),2))
+
 subplot(2,3,3)
 fft_img = fftshift(fft2(noise_mb_img));
+
 factor = abs(H).^2 ./ (abs(H).^2 + NSR);
 denoise_img = inv_H .* factor .* fft_img;
 res_img = real(ifft2(ifftshift(denoise_img)));
