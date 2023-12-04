@@ -3,8 +3,8 @@ close all;
 
 % 1
 yuvdata = load("yuvdata.mat");
-w = yuvdata.rows;
-h = yuvdata.cols;
+height = yuvdata.rows;
+width = yuvdata.cols;
 fprintf("\nmatrix size %dx%d\n", yuvdata.rows, yuvdata.cols);
 fprintf("yy size (%d,%d)\n", size(yuvdata.yy));
 fprintf("uu size (%d,%d)\n", size(yuvdata.uu));
@@ -24,17 +24,17 @@ fprintf("vv size (%d,%d)\n", size(yuvdata.vv));
 
 % 1b
 figure
-Y = reshape(yuvdata.yy, h, w);
-U = imresize(reshape(yuvdata.uu, h/2, w/2),[h w],'nearest');
-V = imresize(reshape(yuvdata.vv, h/2, w/2),[h w],'nearest');
+Y = reshape(yuvdata.yy, width, height);
+U = imresize(reshape(yuvdata.uu, width/2, height/2),[width height],'nearest');
+V = imresize(reshape(yuvdata.vv, width/2, height/2),[width height],'nearest');
 subplot(1,3,1)
-imshow(Y,[])
+imshow(Y',[])
 title("Y channel")
 subplot(1,3,2)
-imshow(U,[])
+imshow(U',[])
 title("U channel")
 subplot(1,3,3)
-imshow(V,[])
+imshow(V',[])
 title("V channel")
 
 % 1c
@@ -50,19 +50,19 @@ RGB=Yuv2Rgb*YUV';
 
 % 1f
 figure
-R=reshape(RGB(1,:), h, w);
-G=reshape(RGB(2,:), h, w);
-B=reshape(RGB(3,:), h, w);
-RGB = zeros(h,w,3,"uint8");
-RGB(:,:,1) = uint8(R);
-RGB(:,:,2) = uint8(G);
-RGB(:,:,3) = uint8(B);
+R=reshape(RGB(1,:), width, height);
+G=reshape(RGB(2,:), width, height);
+B=reshape(RGB(3,:), width, height);
+RGB = zeros(height,width,3,"uint8");
+RGB(:,:,1) = uint8(R');
+RGB(:,:,2) = uint8(G');
+RGB(:,:,3) = uint8(B');
 imshow(RGB,[]);
 
 % 2a
 figure
 lena = imread("lena.tiff");
-[h, w, c] = size(lena);
+[width, height, c] = size(lena);
 YCbCr = rgb2ycbcr(lena);
 subplot(1,3,1)
 imshow(YCbCr(:,:,1),[])
@@ -75,9 +75,6 @@ imshow(YCbCr(:,:,3),[])
 title("Cr channel")
 
 % 2b
-
-close all;
-
 % 422 Cb Cr
 Cb_422 = YCbCr(:,:,2);
 Cb_422 = Cb_422(1:2:end,:);
@@ -103,38 +100,38 @@ subplot(2,3,1)
 imshow(lena,[]);
 title("org img")
 % 422 Cb Cr
-YCbCr_422 = zeros([h,w,3], "uint8");
+YCbCr_422 = zeros([width,height,3], "uint8");
 YCbCr_422(:,:,1) = YCbCr(:,:,1);
-YCbCr_422(:,:,2) = imresize(Cb_422,[h,w],'nearest');
-YCbCr_422(:,:,3) = imresize(Cr_422,[h,w],'nearest');
+YCbCr_422(:,:,2) = imresize(Cb_422,[width,height],'nearest');
+YCbCr_422(:,:,3) = imresize(Cr_422,[width,height],'nearest');
 lena_422 = ycbcr2rgb(YCbCr_422);
 subplot(2,3,4)
 imshow(lena_422,[])
 err = immse(lena, lena_422);
 title(strcat("Color 422 - ",num2str(err)))
 % 411 Cb Cr
-YCbCr_411 = zeros([h,w,3], "uint8");
+YCbCr_411 = zeros([width,height,3], "uint8");
 YCbCr_411(:,:,1) = YCbCr(:,:,1);
-YCbCr_411(:,:,2) = imresize(Cb_411,[h,w],'nearest');
-YCbCr_411(:,:,3) = imresize(Cr_411,[h,w],'nearest');
+YCbCr_411(:,:,2) = imresize(Cb_411,[width,height],'nearest');
+YCbCr_411(:,:,3) = imresize(Cr_411,[width,height],'nearest');
 lena_411 = ycbcr2rgb(YCbCr_411);
 subplot(2,3,5)
 imshow(lena_411,[])
 err = immse(lena, lena_411);
 title(strcat("Color 411 - ",num2str(err)))
 % 420 Cb Cr
-YCbCr_420 = zeros([h,w,3], "uint8");
+YCbCr_420 = zeros([width,height,3], "uint8");
 YCbCr_420(:,:,1) = YCbCr(:,:,1);
-YCbCr_420(:,:,2) = imresize(Cb_420,[h,w],'nearest');
-YCbCr_420(:,:,3) = imresize(Cr_420,[h,w],'nearest');
+YCbCr_420(:,:,2) = imresize(Cb_420,[width,height],'nearest');
+YCbCr_420(:,:,3) = imresize(Cr_420,[width,height],'nearest');
 lena_420 = ycbcr2rgb(YCbCr_420);
 subplot(2,3,6)
 imshow(lena_420,[])
 err = immse(lena, lena_420);
 title(strcat("Color 420 - ",num2str(err)))
 % 411 Y
-YCbCr_411 = zeros([h,w,3], "uint8");
-YCbCr_411(:,:,1) = imresize(Y_411(:,:,1),[h,w],'nearest');
+YCbCr_411 = zeros([width,height,3], "uint8");
+YCbCr_411(:,:,1) = imresize(Y_411(:,:,1),[width,height],'nearest');
 YCbCr_411(:,:,2) = YCbCr(:,:,2);
 YCbCr_411(:,:,3) = YCbCr(:,:,3);
 lena_411 = ycbcr2rgb(YCbCr_411);
